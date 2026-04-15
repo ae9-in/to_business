@@ -1,7 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "vite",
-  "installCommand": "npm install --include=dev && npm --prefix backend install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "version": 2,
+  "installCommand": "npm install --include=dev && npm --prefix backend install --include=dev",
+  "buildCommand": "npm run build:app",
+  "functions": {
+    "api/index.ts": {
+      "includeFiles": "dist/**"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.ts"
+    }
+  ]
 }

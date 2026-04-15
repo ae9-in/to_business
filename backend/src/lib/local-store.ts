@@ -15,7 +15,9 @@ type CollectionName =
 
 type LocalDatabase = Record<CollectionName, any[]>
 
-const dataDir = path.resolve(process.cwd(), 'data')
+const dataDir = process.env.VERCEL
+  ? path.resolve('/tmp/to-business-data')
+  : path.resolve(process.cwd(), 'data')
 const dbFile = path.join(dataDir, 'local-db.json')
 
 let state: LocalDatabase | null = null
