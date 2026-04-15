@@ -81,12 +81,6 @@ async function seedIfNeeded(database: LocalDatabase) {
   const now = new Date()
   const adminId = new ObjectId()
   const staffId = new ObjectId()
-  const shop1Id = new ObjectId()
-  const shop2Id = new ObjectId()
-  const deliveryId = new ObjectId()
-  const reminder1Id = new ObjectId()
-  const reminder2Id = new ObjectId()
-  const noteId = new ObjectId()
 
   database.users.push(
     {
@@ -112,118 +106,6 @@ async function seedIfNeeded(database: LocalDatabase) {
       updatedAt: now,
     },
   )
-
-  database.shops.push(
-    {
-      _id: shop1Id,
-      shopName: 'A1 Pharma',
-      ownerName: 'Rakesh Sharma',
-      businessType: 'Pharmacy',
-      description: 'Regular monthly medicine orders',
-      addressLine1: '12 Market Road',
-      addressLine2: '',
-      area: 'Salt Lake',
-      city: 'Kolkata',
-      state: 'West Bengal',
-      pincode: '700091',
-      phoneNumber1: '+919876543210',
-      phoneNumber2: '',
-      email: 'a1@example.com',
-      productCategory: 'FMCG',
-      status: 'DELIVERED',
-      priority: 'MEDIUM',
-      source: 'Walk-in',
-      assignedStaffId: staffId,
-      createdById: adminId,
-      createdAt: new Date(now.getTime() - 15 * 86400000),
-      updatedAt: now,
-      isArchived: false,
-    },
-    {
-      _id: shop2Id,
-      shopName: 'City Mart',
-      ownerName: 'Anita Gupta',
-      businessType: 'Supermarket',
-      description: 'Needs follow-up on beverages order',
-      addressLine1: '78 Lake View',
-      addressLine2: '',
-      area: 'Ballygunge',
-      city: 'Kolkata',
-      state: 'West Bengal',
-      pincode: '700019',
-      phoneNumber1: '+919812345678',
-      phoneNumber2: '',
-      email: 'citymart@example.com',
-      productCategory: 'Beverages',
-      status: 'FOLLOW_UP_REQUIRED',
-      priority: 'HIGH',
-      source: 'Referral',
-      assignedStaffId: staffId,
-      createdById: adminId,
-      createdAt: new Date(now.getTime() - 6 * 86400000),
-      updatedAt: now,
-      isArchived: false,
-    },
-  )
-
-  database.deliveries.push({
-    _id: deliveryId,
-    shopId: shop1Id,
-    deliveryDate: new Date(now.getTime() - 10 * 86400000),
-    productType: 'Monthly Restock',
-    quantity: 24,
-    notes: 'Delivered successfully',
-    createdById: adminId,
-    createdAt: new Date(now.getTime() - 10 * 86400000),
-    updatedAt: new Date(now.getTime() - 10 * 86400000),
-  })
-
-  database.reminders.push(
-    {
-      _id: reminder1Id,
-      shopId: shop1Id,
-      deliveryId,
-      reminderDate: new Date(now.getTime() + 2 * 86400000),
-      reminderType: 'MONTHLY_REVISIT',
-      status: 'UPCOMING',
-      priority: 'MEDIUM',
-      title: 'Monthly revisit for A1 Pharma',
-      description: 'Auto-generated monthly revisit',
-      assignedStaffId: staffId,
-      completedAt: null,
-      snoozedUntil: null,
-      createdBySystem: true,
-      createdAt: now,
-      updatedAt: now,
-    },
-    {
-      _id: reminder2Id,
-      shopId: shop2Id,
-      deliveryId: null,
-      reminderDate: new Date(now.getTime() - 1 * 86400000),
-      reminderType: 'MANUAL_FOLLOWUP',
-      status: 'OVERDUE',
-      priority: 'HIGH',
-      title: 'Follow up with City Mart',
-      description: 'Discuss pending beverages order',
-      assignedStaffId: staffId,
-      completedAt: null,
-      snoozedUntil: null,
-      createdBySystem: false,
-      createdAt: now,
-      updatedAt: now,
-    },
-  )
-
-  database.notes.push({
-    _id: noteId,
-    shopId: shop2Id,
-    authorId: adminId,
-    content: 'Customer asked for revised pricing.',
-    noteType: 'FOLLOW_UP',
-    createdAt: now,
-    updatedAt: now,
-  })
 }
 
 async function ensureLoaded() {
