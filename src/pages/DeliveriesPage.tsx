@@ -134,6 +134,8 @@ export function DeliveriesPage() {
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Shop</span>
             <select
+              id="shopId"
+              name="shopId"
               value={shopId}
               onChange={(event) => {
                 const nextShopId = event.target.value
@@ -152,17 +154,17 @@ export function DeliveriesPage() {
 
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Delivery date</span>
-            <input type="date" value={deliveryDate} onChange={(event) => setDeliveryDate(event.target.value)} className="input" />
+            <input id="deliveryDate" name="deliveryDate" type="date" value={deliveryDate} onChange={(event) => setDeliveryDate(event.target.value)} className="input" />
           </label>
 
           <div className="space-y-3">
             <span className="text-sm font-medium text-slate-700">Order lines</span>
             {deliveryOrders.map((line, index) => (
               <div key={`${line.productType}-${index}`} className="grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 md:grid-cols-[1.6fr_1fr_auto]">
-                <select value={line.productType} onChange={(event) => updateDeliveryOrder(index, { productType: event.target.value })} className="input">
+                <select name={`orderProductType-${index}`} value={line.productType} onChange={(event) => updateDeliveryOrder(index, { productType: event.target.value })} className="input">
                   {deliveryCatalogRows.map((row) => <option key={row.productName}>{row.productName}</option>)}
                 </select>
-                <select value={line.sizeLabel} onChange={(event) => updateDeliveryOrder(index, { sizeLabel: event.target.value })} className="input">
+                <select name={`orderSizeLabel-${index}`} value={line.sizeLabel} onChange={(event) => updateDeliveryOrder(index, { sizeLabel: event.target.value })} className="input">
                   {deliverySizeOptions.map((option) => <option key={option}>{option}</option>)}
                 </select>
                 <button
@@ -185,12 +187,14 @@ export function DeliveriesPage() {
 
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Price</span>
-            <input type="number" min="1" step="0.01" value={price} onChange={(event) => setPrice(event.target.value)} className="input" placeholder="4500" />
+            <input id="price" name="price" type="number" min="1" step="0.01" value={price} onChange={(event) => setPrice(event.target.value)} className="input" placeholder="4500" />
           </label>
 
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Bill upload (optional)</span>
             <input
+              id="billFileName"
+              name="billFileName"
               type="file"
               onChange={(event) => setBillFileName(event.target.files?.[0]?.name ?? '')}
               className="input py-2"
@@ -200,7 +204,7 @@ export function DeliveriesPage() {
 
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Notes</span>
-            <textarea value={notes} onChange={(event) => setNotes(event.target.value)} rows={4} className="input" placeholder="Add delivery remarks or stock notes..." />
+            <textarea id="notes" name="notes" value={notes} onChange={(event) => setNotes(event.target.value)} rows={4} className="input" placeholder="Add delivery remarks or stock notes..." />
           </label>
 
           {selectedShop ? (

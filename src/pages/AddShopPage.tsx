@@ -32,7 +32,7 @@ const initialValues: ShopFormValues = {
   area: '',
   city: '',
   pincode: '',
-  deliveryDate: '2026-04-10',
+  deliveryDate: new Date().toISOString().slice(0, 10),
   deliveryProductType: '',
   deliveryQuantity: '',
   deliveryPrice: '',
@@ -128,28 +128,28 @@ export function AddShopPage() {
       >
         <FormSection index={0} title="Basic Information" description="Profile the business with the core contact details only.">
           <FormField label="Shop Name" error={errors.shopName}>
-            <input value={values.shopName} onChange={(event) => setField('shopName', event.target.value)} className="input" />
+            <input id="shopName" name="shopName" value={values.shopName} onChange={(event) => setField('shopName', event.target.value)} className="input" />
           </FormField>
           <FormField label="Owner / Contact Person" error={errors.ownerName}>
-            <input value={values.ownerName} onChange={(event) => setField('ownerName', event.target.value)} className="input" />
+            <input id="ownerName" name="ownerName" value={values.ownerName} onChange={(event) => setField('ownerName', event.target.value)} className="input" />
           </FormField>
           <div className="md:col-span-2">
             <FormField label="Description / Notes">
-              <textarea rows={5} value={values.description} onChange={(event) => setField('description', event.target.value)} className="input" />
+              <textarea id="description" name="description" rows={5} value={values.description} onChange={(event) => setField('description', event.target.value)} className="input" />
             </FormField>
           </div>
         </FormSection>
 
         <FormSection index={1} title="Contact Information" description="Primary and secondary contact details for faster follow-up.">
           <FormField label="Phone Number 1" error={errors.phone1}>
-            <input value={values.phone1} onChange={(event) => setField('phone1', event.target.value)} className="input" />
+            <input id="phone1" name="phone1" value={values.phone1} onChange={(event) => setField('phone1', event.target.value)} className="input" />
           </FormField>
           <FormField label="Phone Number 2" error={errors.phone2}>
-            <input value={values.phone2} onChange={(event) => setField('phone2', event.target.value)} className="input" />
+            <input id="phone2" name="phone2" value={values.phone2} onChange={(event) => setField('phone2', event.target.value)} className="input" />
           </FormField>
           <div className="md:col-span-2">
             <FormField label="Email" error={errors.email}>
-              <input value={values.email} onChange={(event) => setField('email', event.target.value)} className="input" />
+              <input id="email" name="email" value={values.email} onChange={(event) => setField('email', event.target.value)} className="input" />
             </FormField>
           </div>
         </FormSection>
@@ -157,11 +157,13 @@ export function AddShopPage() {
         <FormSection index={2} title="Address Information" description="Location data for delivery routing and area-level reporting.">
           <div className="md:col-span-2 lg:col-span-3">
             <FormField label="Full Address">
-              <input value={values.fullAddress} onChange={(event) => setField('fullAddress', event.target.value)} className="input" />
+              <input id="fullAddress" name="fullAddress" value={values.fullAddress} onChange={(event) => setField('fullAddress', event.target.value)} className="input" />
             </FormField>
           </div>
           <FormField label="Region">
             <select
+              id="region"
+              name="region"
               value={selectedRegion}
               onChange={(event) => {
                 const nextRegion = event.target.value as (typeof regionOptions)[number] | ''
@@ -176,6 +178,8 @@ export function AddShopPage() {
           </FormField>
           <FormField label="Area">
             <select
+              id="area"
+              name="area"
               value={values.area}
               onChange={(event) => setField('area', event.target.value)}
               className="input"
@@ -186,16 +190,16 @@ export function AddShopPage() {
             </select>
           </FormField>
           <FormField label="City">
-            <input value={values.city} onChange={(event) => setField('city', event.target.value)} className="input" />
+            <input id="city" name="city" value={values.city} onChange={(event) => setField('city', event.target.value)} className="input" />
           </FormField>
           <FormField label="Pincode">
-            <input value={values.pincode} onChange={(event) => setField('pincode', event.target.value)} className="input" />
+            <input id="pincode" name="pincode" value={values.pincode} onChange={(event) => setField('pincode', event.target.value)} className="input" />
           </FormField>
         </FormSection>
 
         <FormSection index={3} title="Delivery Information" description="Add one or more order lines, then enter the total delivery price with an optional bill upload.">
           <FormField label="Date of Delivery" error={errors.deliveryDate}>
-            <input type="date" value={values.deliveryDate} onChange={(event) => setField('deliveryDate', event.target.value)} className="input" />
+            <input id="deliveryDate" name="deliveryDate" type="date" value={values.deliveryDate} onChange={(event) => setField('deliveryDate', event.target.value)} className="input" />
           </FormField>
           <div className="md:col-span-2 lg:col-span-3">
             <FormField label="Order lines" error={errors.deliveryProductType}>
@@ -230,10 +234,12 @@ export function AddShopPage() {
             </FormField>
           </div>
           <FormField label="Price" error={errors.deliveryPrice}>
-            <input type="number" min="1" step="0.01" value={values.deliveryPrice} onChange={(event) => setField('deliveryPrice', event.target.value)} className="input" />
+            <input id="deliveryPrice" name="deliveryPrice" type="number" min="1" step="0.01" value={values.deliveryPrice} onChange={(event) => setField('deliveryPrice', event.target.value)} className="input" />
           </FormField>
           <FormField label="Bill Upload (Optional)">
             <input
+              id="deliveryBillFileName"
+              name="deliveryBillFileName"
               type="file"
               onChange={(event) => setField('deliveryBillFileName', event.target.files?.[0]?.name ?? '')}
               className="input py-2"
@@ -242,25 +248,25 @@ export function AddShopPage() {
           </FormField>
           <div className="md:col-span-2">
             <FormField label="Delivery Notes">
-              <textarea rows={4} value={values.deliveryNotes} onChange={(event) => setField('deliveryNotes', event.target.value)} className="input" />
+              <textarea id="deliveryNotes" name="deliveryNotes" rows={4} value={values.deliveryNotes} onChange={(event) => setField('deliveryNotes', event.target.value)} className="input" />
             </FormField>
           </div>
         </FormSection>
 
         <FormSection index={4} title="Follow-up / Reminder" description="Reminder defaults to 30 days after delivery, with manual override supported.">
           <FormField label="Suggested Reminder">
-            <input value={suggestedReminder} readOnly className="input bg-slate-50" />
+            <input id="suggestedReminder" name="suggestedReminder" value={suggestedReminder} readOnly className="input bg-slate-50" />
           </FormField>
           <FormField label="Override Reminder Date">
-            <input type="date" value={values.nextReminderDate} onChange={(event) => setField('nextReminderDate', event.target.value)} className="input" />
+            <input id="nextReminderDate" name="nextReminderDate" type="date" value={values.nextReminderDate} onChange={(event) => setField('nextReminderDate', event.target.value)} className="input" />
           </FormField>
           <div className="md:col-span-2">
             <FormField label="Reminder Notes">
-              <textarea rows={4} value={values.reminderNotes} onChange={(event) => setField('reminderNotes', event.target.value)} className="input" />
+              <textarea id="reminderNotes" name="reminderNotes" rows={4} value={values.reminderNotes} onChange={(event) => setField('reminderNotes', event.target.value)} className="input" />
             </FormField>
           </div>
           <FormField label="Assigned Staff Member">
-            <select value={values.assignedTo} onChange={(event) => setField('assignedTo', event.target.value)} className="input">
+            <select id="assignedTo" name="assignedTo" value={values.assignedTo} onChange={(event) => setField('assignedTo', event.target.value)} className="input">
               {staffMembers.map((option) => <option key={option}>{option}</option>)}
             </select>
           </FormField>
@@ -268,17 +274,17 @@ export function AddShopPage() {
 
         <FormSection index={5} title="Status Section" description="Initial business stage, priority, and lead source.">
           <FormField label="Initial Status">
-            <select value={values.status} onChange={(event) => setField('status', event.target.value as ShopFormValues['status'])} className="input">
+            <select id="status" name="status" value={values.status} onChange={(event) => setField('status', event.target.value as ShopFormValues['status'])} className="input">
               {SHOP_STATUSES.map((option) => <option key={option}>{option}</option>)}
             </select>
           </FormField>
           <FormField label="Priority">
-            <select value={values.priority} onChange={(event) => setField('priority', event.target.value as ShopFormValues['priority'])} className="input">
+            <select id="priority" name="priority" value={values.priority} onChange={(event) => setField('priority', event.target.value as ShopFormValues['priority'])} className="input">
               {PRIORITIES.map((option) => <option key={option}>{option}</option>)}
             </select>
           </FormField>
           <FormField label="Source">
-            <input value={values.source} onChange={(event) => setField('source', event.target.value)} className="input" />
+            <input id="source" name="source" value={values.source} onChange={(event) => setField('source', event.target.value)} className="input" />
           </FormField>
         </FormSection>
 

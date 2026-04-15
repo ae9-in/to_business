@@ -5,7 +5,6 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { initialShops } from '../mock-data/shops'
 import type { ShopFormValues, ShopRecord, ShopStatus } from '../types/shop'
 import { api } from '../utils/api'
 import { mapShop } from '../utils/mappers'
@@ -78,7 +77,7 @@ function getNextStatus(status: ShopStatus): ShopStatus {
 }
 
 export function ShopsProvider({ children }: { children: ReactNode }) {
-  const [shops, setShops] = useState<ShopRecord[]>(initialShops)
+  const [shops, setShops] = useState<ShopRecord[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 

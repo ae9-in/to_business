@@ -243,7 +243,7 @@ export function DashboardPage() {
                   {deliveryChangeLabel}
                 </span>
               </div>
-              <div className="h-64">
+              <div className="h-64 min-h-[256px]">
                 <ResponsiveContainer width="100%" height="100%" minWidth={280} minHeight={240}>
                   <AreaChart data={deliveryTrend}>
                     <defs>
@@ -264,7 +264,7 @@ export function DashboardPage() {
 
             <div className="min-w-0 rounded-3xl border border-slate-200 p-4">
               <p className="text-sm font-semibold text-slate-900">Reminder status breakdown</p>
-              <div className="h-64">
+              <div className="h-64 min-h-[256px]">
                 <ResponsiveContainer width="100%" height="100%" minWidth={280} minHeight={240}>
                   <PieChart>
                     <Pie data={reminderBreakdown} cx="50%" cy="50%" innerRadius={55} outerRadius={88} paddingAngle={4} dataKey="value">

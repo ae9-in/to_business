@@ -69,7 +69,7 @@ export function ReportsPage() {
       <SectionHeading eyebrow="Reports" title="Business summary and performance view" description="Visual reporting on shop growth, deliveries, reminders completed, and account distribution. Charts refresh automatically from live backend data." />
       <div className="grid gap-6 xl:grid-cols-3">
         <ChartCard title="Shops by area">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={280} minHeight={240}>
             <BarChart data={byArea}>
               <CartesianGrid stroke="#e2e8f0" strokeDasharray="4 4" />
               <XAxis dataKey="name" tickLine={false} axisLine={false} />
@@ -80,7 +80,7 @@ export function ReportsPage() {
           </ResponsiveContainer>
         </ChartCard>
         <ChartCard title="Shops by product category">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={280} minHeight={240}>
             <BarChart data={byProduct}>
               <CartesianGrid stroke="#e2e8f0" strokeDasharray="4 4" />
               <XAxis dataKey="name" hide />
@@ -91,7 +91,7 @@ export function ReportsPage() {
           </ResponsiveContainer>
         </ChartCard>
         <ChartCard title="Active vs inactive shops">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={280} minHeight={240}>
             <PieChart>
               <Pie data={activeInactive} dataKey="value" cx="50%" cy="50%" innerRadius={60} outerRadius={88} fill="#1d6b57" paddingAngle={4} />
               <Tooltip />

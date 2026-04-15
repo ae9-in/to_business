@@ -229,8 +229,8 @@ export function ShopDetailsPage() {
         <section className="rounded-[32px] border border-white/70 bg-white/80 p-6 shadow-[0_22px_50px_rgba(24,57,49,0.08)]">
           <SectionHeading title="Notes & Activity" description="Timestamped remarks and operational movement." />
           <div className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-4">
-            <label className="block text-sm font-medium text-slate-700">Add note</label>
-            <textarea rows={4} value={newNote} onChange={(event) => setNewNote(event.target.value)} placeholder="Capture an internal remark or follow-up outcome..." className="mt-3 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 outline-none" />
+            <label className="block text-sm font-medium text-slate-700" htmlFor="newNote">Add note</label>
+            <textarea id="newNote" name="newNote" rows={4} value={newNote} onChange={(event) => setNewNote(event.target.value)} placeholder="Capture an internal remark or follow-up outcome..." className="mt-3 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 outline-none" />
             <button onClick={() => { if (!newNote.trim()) return; void addNote(shop.id, newNote.trim()); pushToast('Note saved', 'Activity timeline refreshed with the new note.'); setNewNote('') }} className="mt-3 inline-flex items-center gap-2 rounded-2xl bg-[#1d6b57] px-4 py-2.5 text-sm font-semibold text-white">
               <Plus className="h-4 w-4" />
               Add note
@@ -257,16 +257,16 @@ export function ShopDetailsPage() {
         <div className="space-y-4">
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Delivery date</span>
-            <input type="date" value={deliveryDate} onChange={(event) => setDeliveryDate(event.target.value)} className="input" />
+            <input id="deliveryDate" name="deliveryDate" type="date" value={deliveryDate} onChange={(event) => setDeliveryDate(event.target.value)} className="input" />
           </label>
           <div className="space-y-3">
             <span className="text-sm font-medium text-slate-700">Order lines</span>
             {deliveryOrders.map((line, index) => (
               <div key={`${line.productType}-${index}`} className="grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 md:grid-cols-[1.6fr_1fr_auto]">
-                <select value={line.productType} onChange={(event) => updateDeliveryOrder(index, { productType: event.target.value })} className="input">
+                <select name={`orderProductType-${index}`} value={line.productType} onChange={(event) => updateDeliveryOrder(index, { productType: event.target.value })} className="input">
                   {deliveryCatalogRows.map((row) => <option key={row.productName}>{row.productName}</option>)}
                 </select>
-                <select value={line.sizeLabel} onChange={(event) => updateDeliveryOrder(index, { sizeLabel: event.target.value })} className="input">
+                <select name={`orderSizeLabel-${index}`} value={line.sizeLabel} onChange={(event) => updateDeliveryOrder(index, { sizeLabel: event.target.value })} className="input">
                   {deliverySizeOptions.map((option) => <option key={option}>{option}</option>)}
                 </select>
                 <button
@@ -288,11 +288,13 @@ export function ShopDetailsPage() {
           </div>
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Price</span>
-            <input type="number" min="1" step="0.01" value={deliveryPrice} onChange={(event) => setDeliveryPrice(event.target.value)} className="input" />
+            <input id="deliveryPrice" name="deliveryPrice" type="number" min="1" step="0.01" value={deliveryPrice} onChange={(event) => setDeliveryPrice(event.target.value)} className="input" />
           </label>
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Bill upload (optional)</span>
             <input
+              id="deliveryBillFileName"
+              name="deliveryBillFileName"
               type="file"
               onChange={(event) => setDeliveryBillFileName(event.target.files?.[0]?.name ?? '')}
               className="input py-2"
@@ -301,7 +303,7 @@ export function ShopDetailsPage() {
           </label>
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-slate-700">Delivery notes</span>
-            <textarea rows={4} value={deliveryNotes} onChange={(event) => setDeliveryNotes(event.target.value)} className="input" />
+            <textarea id="deliveryNotes" name="deliveryNotes" rows={4} value={deliveryNotes} onChange={(event) => setDeliveryNotes(event.target.value)} className="input" />
           </label>
           <div className="flex justify-end gap-3">
             <button onClick={() => setDeliveryModalOpen(false)} className="rounded-2xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600">
@@ -361,7 +363,7 @@ export function ShopDetailsPage() {
               <div className="md:col-span-2">
                 <label className="flex flex-col gap-2">
                   <span className="text-sm font-medium text-slate-700">Description</span>
-                  <textarea rows={4} value={editValues.description} onChange={(event) => setEditValues((current) => current ? { ...current, description: event.target.value } : current)} className="input" />
+                  <textarea id="editDescription" name="editDescription" rows={4} value={editValues.description} onChange={(event) => setEditValues((current) => current ? { ...current, description: event.target.value } : current)} className="input" />
                 </label>
               </div>
             </div>
@@ -392,10 +394,11 @@ export function ShopDetailsPage() {
 }
 
 function Field({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
+  const fieldId = label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   return (
-    <label className="flex flex-col gap-2">
+    <label htmlFor={fieldId} className="flex flex-col gap-2">
       <span className="text-sm font-medium text-slate-700">{label}</span>
-      <input value={value} onChange={(event) => onChange(event.target.value)} className="input" />
+      <input id={fieldId} name={fieldId} value={value} onChange={(event) => onChange(event.target.value)} className="input" />
     </label>
   )
 }
