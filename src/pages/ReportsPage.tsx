@@ -107,7 +107,7 @@ function ChartCard({ title, children }: { title: string; children: React.ReactNo
   return (
     <section className="rounded-[32px] border border-white/70 bg-white/80 p-6 shadow-[0_22px_50px_rgba(24,57,49,0.08)]">
       <h3 className="text-lg font-semibold text-slate-950">{title}</h3>
-      <div className="mt-6 h-80">{children}</div>
+      <div className="mt-6 h-80 min-h-[320px] min-w-0">{children}</div>
     </section>
   )
 }
