@@ -1,0 +1,37 @@
+{
+  "users": [
+    {
+      "_id": {
+        "$oid": "69d9d509a5a0bab1b61a045a"
+      },
+      "fullName": "Area Supervisor",
+      "email": "admin@tobusiness.local",
+      "passwordHash": "$2a$10$RbrgK3.YytiwWc3wa4n3Cer2obBT3uUcQwN5pqFX/Zu..CHTEn/6e",
+      "role": "ADMIN",
+      "phone": "+919999999999",
+      "isActive": true,
+      "createdAt": "2026-04-11T04:58:49.092Z",
+      "updatedAt": "2026-04-11T04:58:49.092Z"
+    },
+    {
+      "_id": {
+        "$oid": "69d9d509a5a0bab1b61a045b"
+      },
+      "fullName": "Sales Executive",
+      "email": "staff@tobusiness.local",
+      "passwordHash": "$2a$10$J6GlV3c56iw24hDi.3RYHe8QBtGw49ig0cZSeZTpO6GojSjjvHC2K",
+      "role": "STAFF",
+      "phone": "+918888888888",
+      "isActive": true,
+      "createdAt": "2026-04-11T04:58:49.092Z",
+      "updatedAt": "2026-04-11T04:58:49.092Z"
+    }
+  ],
+  "shops": [],
+  "deliveries": [],
+  "reminders": [],
+  "notes": [],
+  "activityLogs": [],
+  "refreshTokens": [],
+  "staffAssignmentHistory": []
+}

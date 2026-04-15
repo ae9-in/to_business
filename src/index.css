@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap');
+@import "tailwindcss";
+
+:root {
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+  color: #0f172a;
+  background: #eef3f1;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: 'Newsreader', Georgia, serif;
+}
+
+p {
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.input {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid rgb(226 232 240);
+  background: white;
+  padding: 0.9rem 1rem;
+  font-size: 0.95rem;
+  color: rgb(51 65 85);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: #1d6b57;
+  box-shadow: 0 0 0 4px rgba(29, 107, 87, 0.12);
+  transition:
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    transform 180ms ease;
+}
+
+.input,
+button,
+section {
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 260ms ease,
+    transform 260ms ease,
+    opacity 220ms ease;
+}
+
+.section-card {
+  position: relative;
+  transform-origin: top center;
+  will-change: transform, box-shadow, opacity;
+}
+
+.section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 28px 60px rgba(24, 57, 49, 0.11);
+}
+
+.section-reveal {
+  opacity: 0;
+  transform: translateY(18px) scale(0.995);
+  animation: section-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    scroll-behavior: auto;
+  }
+
+  .input,
+  button,
+  section,
+  .section-card,
+  .section-reveal {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
